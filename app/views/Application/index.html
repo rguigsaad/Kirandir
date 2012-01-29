@@ -1,4 +1,33 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+#{if mainPost}		
+	#{mainArticle Post:mainPost /}
+
+	#{if postList.size() > 1}
+        <!-- Bulle article -->
+        <div class="row">
+			#{list Post:postList, as:'currentPost'}
+    			#{articleBulle post:currentPost /}
+			#{/list}
+        </div>
+
+        <hr>
+
+        <div class="row">
+			#{list arg:postList, as:'currentPost'}
+				#{if currentPost_index <= 3}
+    				#{articleBulle Post:currentPost /}
+    			#{/if}
+			#{/list}
+        </div>
+        
+        <div class="row">
+			#{list arg:postList, as:'currentPost'}
+				#{if (currentPost_index > 3 && currentPost_index <= 6)}
+    				#{articleBulle Post:currentPost /}
+    			#{/if}
+			#{/list}
+        </div>
+	#{/if}
+#{/if}
