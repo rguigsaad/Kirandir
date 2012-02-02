@@ -1,31 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+
+
 #{if mainPost}		
-	#{mainArticle Post:mainPost /}
-
+	#{carousel /}
+	
 	#{if postList.size() > 1}
-        <!-- Bulle article -->
-        <div class="row">
-			#{list Post:postList, as:'currentPost'}
-    			#{articleBulle post:currentPost /}
-			#{/list}
-        </div>
 
-        <hr>
-
-        <div class="row">
+        <div class="row-fluid">
 			#{list arg:postList, as:'currentPost'}
 				#{if currentPost_index <= 3}
-    				#{articleBulle Post:currentPost /}
+    				#{articleBulle post:currentPost /}
     			#{/if}
 			#{/list}
         </div>
         
-        <div class="row">
+        <div class="row-fluid">
 			#{list arg:postList, as:'currentPost'}
 				#{if (currentPost_index > 3 && currentPost_index <= 6)}
-    				#{articleBulle Post:currentPost /}
+    				#{articleBulle post:currentPost /}
     			#{/if}
 			#{/list}
         </div>

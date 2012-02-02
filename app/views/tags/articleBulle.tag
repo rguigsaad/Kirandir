@@ -1,5 +1,5 @@
-<div class="span5">
-  <h2>${_Post.title}</h2>
-  <p>${_Post.content}</p>
-  <p><a class="btn" href="#">View details &raquo;</a></p>
+<div class="span4">
+  <h2>${_post.title}</h2>
+  <p>${_post.content}</p>
+  <p><a class="btn" href="@{Application.show(_post.id)}">View details &raquo;</a></p>
 </div>

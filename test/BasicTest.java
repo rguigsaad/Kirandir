@@ -1,4 +1,7 @@
 import org.junit.*;
+
+import com.google.code.morphia.Key;
+
 import java.util.*;
 import play.test.*;
 import models.*;
@@ -7,7 +10,7 @@ public class BasicTest extends UnitTest {
 
     @Before
     public void setup() {
-        Fixtures.deleteDatabase();
+        MorphiaFixtures.deleteDatabase();
     }
     	
     @Test
@@ -40,9 +43,9 @@ public class BasicTest extends UnitTest {
     	
         assertEquals(1, Post.count());
         
-        List<Post> testPostList = Post.find("byAuthor",testUser).fetch();
+        List<Post> testPostList = Post.find("byAuthor",testUser).asList();
         
-        assertEquals(testPostList.size(),1);
+        assertEquals(1,testPostList.size());
         
         Post testPost = testPostList.get(0);
     	       
@@ -62,11 +65,11 @@ public class BasicTest extends UnitTest {
     	new Comment(testPost, "test writter", "My Test Comment").save();
     	new Comment(testPost, "test writter2", "My Test Comment2").save();
     	
-    	assertEquals(Comment.count(),2);
+    	assertEquals(2,Comment.count());
     	
-    	List<Comment> testCommentList = Comment.find("byPost", testPost).fetch();
+    	List<Comment> testCommentList = Comment.find("byPost", testPost).asList();
     	
-    	assertEquals(testCommentList.size(),2);
+    	assertEquals(2,testCommentList.size());
     	
     	Comment testComment = testCommentList.get(0);
     	
@@ -96,17 +99,30 @@ public class BasicTest extends UnitTest {
         bobPost.addComment("Jeff", "Nice post");
         bobPost.addComment("Tom", "I knew that !");
      
-        assertEquals(Post.count(),1);
-        assertEquals(User.count(),1);
-        assertEquals(Comment.count(),2);
+        assertEquals(1,Post.count());
+        assertEquals(1,User.count());
+        assertEquals(2,Comment.count());
         
         List commentList = bobPost.comments;
         
-        assertEquals(commentList.size(),2);
+        assertEquals(2,commentList.size());
         
         bobPost.delete();
-        assertEquals(Post.count(),0);
-        assertEquals(Comment.count(),0);
+        assertEquals(0,Post.count());
+        assertEquals(0,Comment.count());
+    }
+    
+    @Test
+    public void previousAndNextPostTest(){
+    	Fixtures.loadModels("data.yml");
+    	
+    	Post firstPost = Post.q().order("postedAt").first();
+    	assertEquals("Just a test of YABE",firstPost.title);
+    	
+    	Post secondPost = firstPost.next();
+    	assertEquals("The MVC application",secondPost.title);
+    	
+    	assertEquals("Just a test of YABE",secondPost.previous().title);
     }
     
     @Test
@@ -125,15 +141,17 @@ public class BasicTest extends UnitTest {
         assertNull(User.connect("tom@gmail.com", "secret"));
      
         // Find all bob's posts
-        List<Post> bobPosts = Post.find("author.email", "bob@gmail.com").fetch();
+        User bob = User.find("byEmail","bob@gmail.com").first();
+        List<Post> bobPosts = Post.find("byAuthor", bob).asList();
         assertEquals(2, bobPosts.size());
      
         // Find all comments related to bob's posts
-        List<Comment> bobComments = Comment.find("post.author.email", "bob@gmail.com").fetch();
+        List<Key<Post>> bobPosts2 = Post.find("byAuthor", bob).asKeyList();
+        List<Comment> bobComments = Comment.q().filter("post in", bobPosts2).asList();
         assertEquals(3, bobComments.size());
      
         // Find the most recent post
-        Post frontPost = Post.find("order by postedAt desc").first();
+        Post frontPost = Post.q().order("-postedAt").first();
         assertNotNull(frontPost);
         assertEquals("About the model layer", frontPost.title);
      
