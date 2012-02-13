@@ -1,38 +1,38 @@
 package models;
  
 import java.util.*;
-import com.google.code.morphia.annotations.*;
+import javax.persistence.*;
  
-import play.data.validation.Required;
-import play.modules.morphia.Model;
-import play.modules.morphia.Model.Added;
-
+import play.db.jpa.*;
+import play.data.validation.*;
+ 
 @Entity
 public class Comment extends Model {
-	
-	@Required
+ 
+    @Required
     public String author;
-	
+    
+    @Required
     public Date postedAt;
      
+    @Lob
     @Required
+    @MaxSize(10000)
     public String content;
     
-    @Reference
+    @ManyToOne
+    @Required
     public Post post;
     
-    public Comment(Post post, String author, String content){
-    	this.author = author;
-    	this.post = post;
-    	this.content = content;
-    	this.postedAt = new Date();
+    public Comment(Post post, String author, String content) {
+        this.post = post;
+        this.author = author;
+        this.content = content;
+        this.postedAt = new Date();
     }
     
-    @Added void cascadeAdd() {
-        if (!post.comments.contains(this)) {
-            post.comments.add(this);
-            post.save();
-        }
+    public String toString() {
+        return content.length() > 50 ? content.substring(0, 50) + "..." : content;
     }
-        
+ 
 }

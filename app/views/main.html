@@ -1,104 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="${_response_encoding}">
-    <title>#{get 'title' /}</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>#{get 'title' /}</title>     
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+         #{stylesheet src:"bootstrap.css" /}
+          #{stylesheet src:"main.css" /}
+         #{stylesheet src:"docs.css" /}
+         #{stylesheet src:"sharrre.css" /}
+         
+         
+         
+         #{script src:"jquery.js" /}
+         #{script src:"bootstrap.js" /}
+         #{script src:"jquery.sharrre.js" /}
+         #{script src:"sharrre.js" /}
+         #{script src:"jquery.tools.min.js" /}
+         #{script src:"twitter-friends.js" /}
+           #{script src:"jquery.tweetable.js" /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/logo.png'}" />
+         <style type="text/css">
+             body {
+               padding-top: 60px;
+               padding-bottom: 40px;
+             }
+            .sidebar-nav {
+             padding: 9px 0;
+            }
+        </style>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le styles -->
-    #{stylesheet src:"bootstrap.css" /}
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-      }
-    </style>
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-  </head>
-
-  <body>
+    </head>
+    <body>
+    	
     <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="@{Application.index()}">${blogTitle}</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="@{Application.index()}">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+            <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#" style="margin-left: 10px;"> KIRANDIR</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Events</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorial <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Android</a></li>
+                <li><a href="#">Web</a></li>
+                <li><a href="#">SOA OpenSource</a></li>
+                <li class="divider"></li>
+                <li><a href="#">All Articles</a></li>
+              </ul>
+            </li>
+          <li><a href="#">Tutorial</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li class="divider-vertical"></li>
+            <li>
+         	<div style="float:right;">
+          <a href="http://twitter.com/rguigsaad"><img src="@{'/public/images/twitter.png'}" alt=""></a>
+          <a href="#"><img src="@{'/public/images/facebook.png'}" alt=""></a>
+          <a href="#"><img src="@{'/public/images/flickr.png'}" alt=""></a>
+          <a href="#"><img src="@{'/public/images/rss.png'}" alt=""></a>
         </div>
+        </li>
+        <li class="divider-vertical"></li>
+         <li><a href="@{Admin.index()}"> LogIn </a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
+    <div   class="container-fluid">
+      <div  class="row-fluid">
         <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
+        <a href="@{Application.index()}" class="thumbnail"><img src="@{'/public/images/logo.png'}"/></a>
+          <div class="sidebar-nav">
+          <ul class="nav nav-tabs nav-stacked">
+                     <li><a href="#">Android</a></li>
+                <li><a href="#">Web</a></li>
+                <li><a href="#">SOA OpenSource</a></li>
+                <li><a href="#">All Articles</a></li>
+               
+                <li > <div id="tweets"></li>
+			</ul>
+
           </div><!--/.well -->
         </div><!--/span-->
 
         <div class="span9">
-	  #{doLayout /}
-	    </div><!--/span-->
-      </div><!--/row-->
-
-
-      <hr>
+  
+      #{doLayout /}
+      
+        </div><!--/span-->
+        <div style="margin-left: 320px;" id="friends"></div>
+</div>     
 
       <footer>
-        <p>&copy; Company 2012</p>
+
+      		  <div id="sharrre">
+  <div id="shareme" data-url="http://sharrre.com/" data-text="Make your sharing widget with Sharrre (jQuery Plugin)" data-title="share this page"></div>
+</div>
+      	        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; Kirandir 2012</p>
       </footer>
-      
-    </div><!--/.fluid-container-->
-
-    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script src="@{'/public/javascripts/bootstrap-transition.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-alert.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-modal.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-dropdown.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-scrollspy.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-tab.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-tooltip.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-popover.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-button.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-collapse.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-carousel.js'}"></script>
-    <script src="@{'/public/javascripts/bootstrap-typeahead.js'}"></script>
-
-  </body>
+    </div>
+            <script type="text/javascript">
+            		$(function(){
+			$('#tweets').tweetable({username: 'rguigsaad', time: true, limit: 3, replies: true, position: 'append'});
+		});
+		
+ $(document).ready(function(){
+      $('#friends').twitterFriends({
+         debug:1
+         ,username:'rguigsaad'
+      });
+   });
+</script>
+</body>
 </html>

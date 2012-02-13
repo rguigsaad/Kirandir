@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>Administration</title>		
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        #{get 'moreStyles' /}	
+   #{stylesheet src:"bootstrap.css" /}
+          #{stylesheet src:"main.css" /}
+         #{stylesheet src:"docs.css" /}
+         
+         #{script src:"jquery.js" /}
+         #{script src:"bootstrap.js" /}
+         #{script src:"jquery.tools.min.js" /}
+          <link rel="shortcut icon" type="image/png" href="@{'/public/images/logo.png'}" />
+         <style type="text/css">
+             body {
+               padding-top: 60px;
+               padding-bottom: 40px;
+               margin: 60px;
+             }
+            .sidebar-nav {
+             padding: 9px 0;
+            }
+        </style>
+    </head>
+    <body id="admin">
+        
+    <div class="navbar navbar-fixed-top">
+     <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="brand" href="#" style="margin-left: 10px;"> KIRANDIR</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+                   <li class="active ${request.controller == 'Admin' ? 'selected' : ''}">
+            <a href="@{Admin.index()}">My posts</a>
+        </li>
+        #{secure.check 'admin'}
+            <li class="${request.controller == 'Posts' ? 'selected' : ''}">
+                <a href="@{Posts.list()}">Posts</a>
+            </li>
+            <li class="${request.controller == 'Tags' ? 'selected' : ''}">
+                <a href="@{Tags.list()}">Tags</a>
+            </li>
+            <li class="${request.controller == 'Comments' ? 'selected' : ''}">
+                <a href="@{Comments.list()}">Comments</a>
+            </li>
+            <li class="${request.controller == 'Users' ? 'selected' : ''}">
+                <a href="@{Users.list()}">Users</a>
+            </li>
+        #{/secure.check}
+    </ul>
+          </ul>
+          <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+         <li> <a href="@{Secure.logout()}">Log out</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+
+      </div>
+    </div>
+        
+<div id="main">
+    
+    #{doLayout /} 
+</div>
+        
+        <p id="footer">
+            Kirandir is a (not so) powerful blog engine built with the 
+            <a href="http://www.playframework.org">play framework</a>
+            as a tutorial application.
+        </p>
+        
+    </body>
+</html>
