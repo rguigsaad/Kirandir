@@ -5,7 +5,7 @@
         <title>Administration</title>		
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         #{get 'moreStyles' /}	
-   #{stylesheet src:"bootstrap.css" /}
+   		#{stylesheet src:"bootstrap.css" /}
           #{stylesheet src:"main.css" /}
          #{stylesheet src:"docs.css" /}
          
@@ -23,6 +23,19 @@
              padding: 9px 0;
             }
         </style>
+        <!--  Loading Markitup -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/markitup/skins/markitup/style.css'}" />
+		<script type="text/javascript" src="@{'/public/markitup/jquery.markitup.js'}"></script>
+		 
+		<link rel="stylesheet" type="text/css" href="@{'/public/markitup/sets/textile/style.css'}" />
+		<script type="text/javascript" src="@{'/public/markitup/sets/textile/set.js'}"></script>
+		 
+		<script language="javascript">
+		$(document).ready(function()    {
+		    $('#wiki').markItUp(mySettings);
+		});
+		</script>
+		<!-- End markitup -->
     </head>
     <body id="admin">
         
@@ -61,10 +74,20 @@
       </div>
     </div>
         
-<div id="main">
-    
-    #{doLayout /} 
-</div>
+    <div   class="container-fluid">
+      <div  class="row-fluid">
+        <div class="span3">
+        <a href="@{Application.index()}" class="thumbnail"><img src="@{'/public/images/logo.png'}"/></a>
+
+        </div><!--/span-->
+
+        <div class="span9">
+  
+      #{doLayout /}
+      
+        </div><!--/span-->
+        <div style="margin-left: 320px;" id="friends"></div>
+</div>     
         
         <p id="footer">
             Kirandir is a (not so) powerful blog engine built with the 
