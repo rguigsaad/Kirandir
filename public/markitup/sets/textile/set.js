@@ -34,7 +34,7 @@ mySettings = {
 		{name:'Link', openWith:'"', closeWith:'([![Title]!])":[![Link:!:http://]!]', placeHolder:'Your text to link here...' },
 		{separator:'---------------' },
 		{name:'Quotes', openWith:'bq(!(([![Class]!]))!). '},
-		{name:'Code', openWith:'@', closeWith:'@'},
+		{name:'Code block/Code in-line', openBlockWith:'!@', closeBlockWith:'@!', className:'code'},
 		{separator:'---------------' },
 		{name:'Preview', call:'preview', className:'preview'}
 	]

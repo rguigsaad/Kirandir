@@ -6,9 +6,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         #{get 'moreStyles' /}	
    		#{stylesheet src:"bootstrap.css" /}
-          #{stylesheet src:"main.css" /}
-         #{stylesheet src:"docs.css" /}
+        #{stylesheet src:"main.css" /}
+        #{stylesheet src:"docs.css" /}
+        #{stylesheet src:"prettify.css" /}
          
+         #{script src:"google-code-prettify/prettify.js" /}
          #{script src:"jquery.js" /}
          #{script src:"bootstrap.js" /}
          #{script src:"jquery.tools.min.js" /}
@@ -24,7 +26,7 @@
             }
         </style>
         <!--  Loading Markitup -->
-		<link rel="stylesheet" type="text/css" href="@{'/public/markitup/skins/markitup/style.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/markitup/skins/simple/style.css'}" />
 		<script type="text/javascript" src="@{'/public/markitup/jquery.markitup.js'}"></script>
 		 
 		<link rel="stylesheet" type="text/css" href="@{'/public/markitup/sets/textile/style.css'}" />
@@ -37,7 +39,7 @@
 		</script>
 		<!-- End markitup -->
     </head>
-    <body id="admin">
+    <body id="admin" onload="prettyPrint()">
         
     <div class="navbar navbar-fixed-top">
      <div class="navbar-inner">

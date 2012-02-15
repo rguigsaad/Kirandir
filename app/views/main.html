@@ -8,16 +8,17 @@
           #{stylesheet src:"main.css" /}
          #{stylesheet src:"docs.css" /}
          #{stylesheet src:"sharrre.css" /}
+         #{stylesheet src:"prettify.css" /}
          
          
-         
+         #{script src:"google-code-prettify/prettify.js" /}
          #{script src:"jquery.js" /}
          #{script src:"bootstrap.js" /}
          #{script src:"jquery.sharrre.js" /}
          #{script src:"sharrre.js" /}
          #{script src:"jquery.tools.min.js" /}
          #{script src:"twitter-friends.js" /}
-           #{script src:"jquery.tweetable.js" /}
+         #{script src:"jquery.tweetable.js" /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/logo.png'}" />
          <style type="text/css">
              body {
@@ -30,7 +31,7 @@
         </style>
 
     </head>
-    <body>
+    <body onload="prettyPrint()" >
     	
     <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">

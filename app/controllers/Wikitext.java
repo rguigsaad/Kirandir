@@ -1,7 +1,9 @@
 package controllers;
  
 import java.io.StringWriter;
- 
+
+import ext.TextileExtension;
+
 import jj.play.org.eclipse.mylyn.wikitext.core.parser.MarkupParser;
 import jj.play.org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder;
 import jj.play.org.eclipse.mylyn.wikitext.core.parser.builder.HtmlDocumentBuilder.Stylesheet;
@@ -26,7 +28,7 @@ public class Wikitext extends Controller {
         parser.setBuilder(builder);
         parser.parse(wiki);
  
-        String htmlContent = writer.toString();
+        String htmlContent = TextileExtension.bootstrapFormater(writer.toString());
         renderText(htmlContent);
     }
  
@@ -42,6 +44,6 @@ public class Wikitext extends Controller {
         parser.setBuilder(builder);
         parser.parse(wiki);
  
-        return writer.toString();
+        return TextileExtension.bootstrapFormater(writer.toString());
     }
 }
