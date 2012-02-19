@@ -4,6 +4,7 @@
     <head>
         <title>#{get 'title' /}</title>     
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
          #{stylesheet src:"bootstrap.css" /}
           #{stylesheet src:"main.css" /}
          #{stylesheet src:"docs.css" /}
@@ -58,7 +59,13 @@
               </ul>
             </li>
           <li><a href="#">Tutorial</a></li>
+          <li>
+				<form class="navbar-search pull-left">
+				  <input type="text" class="search-query" placeholder="Search">
+				</form>
+			</li>
           </ul>
+
           <ul class="nav pull-right">
             <li class="divider-vertical"></li>
             <li>
@@ -84,8 +91,8 @@
         <a href="@{Application.index()}" class="thumbnail"><img src="@{'/public/images/logo.png'}"/></a>
           <div class="sidebar-nav">
           <ul class="nav nav-tabs nav-stacked">
-                     <li><a href="#">Android</a></li>
-                <li><a href="#">Web</a></li>
+                     <li><a href="#">Best of the Blog</a></li>
+                <li><a href="#">Random Article</a></li>
                 <li><a href="#">SOA OpenSource</a></li>
                 <li><a href="#">All Articles</a></li>
                

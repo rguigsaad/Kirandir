@@ -29,24 +29,55 @@ public class TextileExtension extends JavaExtensions {
 	}
 
 	public static String bootstrapFormater(String text) {
-		String thumbnailBegin = "<ul class=\"thumbnails\"><li class=\"span3\"><a href=\"#\" class=\"thumbnail\"><img";
-		String thumbnailEnd = "/></a></li></ul>";
+		StringBuffer thumbnailPart1 = new StringBuffer(); 
+		thumbnailPart1.append("<ul class=\"thumbnails\">");
+		thumbnailPart1.append("<li class=\"span3\">");
+		thumbnailPart1.append("<a class=\"thumbnail\" data-toggle=\"modal\" href=\"#myModal");
+		
+		String thumbnailPart2 = "\"><img";
+		String thumbnailPart3 = "/></a></li><div id=\"myModal";
+		
+		StringBuffer thumbnailPart4 = new StringBuffer();
+		thumbnailPart4.append("\" class=\"modal hide fade\">");
+		thumbnailPart4.append("<div class=\"modal-body\">");
+		thumbnailPart4.append("<a class=\"close\" data-dismiss=\"modal\" >&times;</a>");
+		
+		String thumbnailPart5 = "</div></div></ul>";
+		
 		String regexp = "<img(.*?)/>";
 		
+		// Set Bootstrap thumbnail for img tag by url ( !http://mypic.jpg(mylabel)!)
 		 Pattern p = Pattern.compile(regexp);
 		 Matcher m = p.matcher(text);
 		 StringBuffer sb = new StringBuffer();
+		 int imgIndex = 0;
 		 while (m.find()) {
-			 String substring = StringUtils.substring(text, m.start(), m.end());
-			 substring = StringUtils.replace(substring, "<img", thumbnailBegin);
-			 substring = StringUtils.replace(substring, "/>", thumbnailEnd);
-		     m.appendReplacement(sb, substring);
+			 String imgTag = StringUtils.substring(text, m.start(), m.end());
+			 String newImgTag = new String(imgTag);
+			 StringBuffer thumbnailBegin = new StringBuffer(thumbnailPart1.toString());
+			 thumbnailBegin.append(imgIndex);
+			 thumbnailBegin.append(thumbnailPart2);
+			 newImgTag = StringUtils.replace(newImgTag, "<img", thumbnailBegin.toString());
+			 StringBuffer thumbnailEnd = new StringBuffer(thumbnailPart3);
+			 thumbnailEnd.append(imgIndex);
+			 thumbnailEnd.append(thumbnailPart4);
+			 thumbnailEnd.append(imgTag);
+			 thumbnailEnd.append(thumbnailPart5);			 
+			 newImgTag = StringUtils.replace(newImgTag, "/>", thumbnailEnd.toString());
+		     m.appendReplacement(sb, newImgTag);
+		     imgIndex++;
 		 }
 		 m.appendTail(sb);
 		 
+		 // Set BootStrap Code prettyprint to block Code
 		 text = StringUtils.replace(sb.toString(),"!@","<pre class=\"prettyprint linenums\">");
 		 text = StringUtils.replace(text,"@!","</pre>");
 //		 text = sb.toString();
+		 
+		// String regexp2 = "$pic.(.*?)\!$";
+		 
+		 //$pic.5!$
+		 
 		 return text;
 	}
 }

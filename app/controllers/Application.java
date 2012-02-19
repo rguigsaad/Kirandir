@@ -7,6 +7,11 @@ import play.libs.*;
 import play.cache.*;
  
 import java.util.*;
+
+import com.alienmegacorp.fileuploads.AbstractUploadedImage.Variant;
+import com.alienmegacorp.fileuploads.FullPicture;
+import com.alienmegacorp.fileuploads.Thumbnail;
+
 import models.*;
  
 public class Application extends Controller {
@@ -59,6 +64,16 @@ public class Application extends Controller {
     public static void listTagged(String tag) {
         List<Post> posts = Post.findTaggedWith(tag);
         render(tag, posts);
+    } 
+    
+    public static void getPicture(long id, Boolean full) {
+        Picture picture = Picture.findById(id);
+        Variant variant;
+        if(full){
+        	variant = new FullPicture();
+        }else{
+        	variant = new Thumbnail();
+        }
+        renderBinary(picture.getLocalFile(variant));
     }
- 
 }

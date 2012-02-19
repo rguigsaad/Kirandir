@@ -1,5 +1,8 @@
 #{extends 'admin.html' /}
 
+<div>
+<div class="well">
+<a class="close" href="/admin">&times;</a>
 #{ifnot post?.id}
     <h3>Write, <span>a new post</span></h3>
 #{/ifnot}
@@ -40,7 +43,29 @@
     </p>
     
     <p>
-        <input type="submit" value="Publish this post to the blog" />
+	  	<a href="/admin"><button class="btn">Back</button></a>
+	  	<button class="btn btn-success" type="submit">Publish this post to the blog</button>
     </p>
-    
+
 #{/form}
+
+    	<label>Upload some images: </label>
+    	<ul class="thumbnails">
+		#{list items:models.Picture.findAll(), as:'picture'}
+		    <li class="span2"><a class="thumbnail" data-toggle="modal" href="#myModal${picture.id}"><img src="@{Application.getPicture(picture.id,'false')}" /></a>
+		    <p style="text-align:center"><input type="text" class="input-mini" value="$pic.${picture.id}$"/></p>
+			<div id="myModal${picture.id}" class="modal hide fade">
+            <div class="modal-body">
+            <a class="close" data-dismiss="modal" >&times;</a>
+			<img src="@{Application.getPicture(picture.id,"true")}" />
+            </div>
+        </div>
+		#{/list}
+		</ul>
+		
+		#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}
+		    <input type="file" id="picture" name="picture" />
+		    <input type="submit" name="submit" class="btn" value="Save" />
+		#{/form}
+</div>
+</div>

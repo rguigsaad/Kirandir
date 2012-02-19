@@ -2,12 +2,35 @@
  
 <h3>Welcome ${user}, <span>you have written ${posts.size() ?: 'no'} ${posts.pluralize('post', 'posts')} so far</span></h3>
  
+ <table class="table table-striped">
+   <thead>
+    <tr>
+      <th>Title</th>
+      <th>Posted At</th>
+      <th>Validated</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  </tbody>
 #{list items:posts, as:'post'}
-    <p class="post ${post_parity}">
+<tr>
+	<td>
         <a href="@{Admin.form(post.id)}">${post.title}</a>
-    </p>
+    </td>
+    <td>
+    	${post.postedAt}
+    </td>
+    <td>
+    	<i class="icon-ok"></i>
+    </td>
+    <td>
+    	<a href="/posts/${post.id}"><i class="icon-file"></i></a>
+    </td>
+</tr>
 #{/list}
+</tbody>
+</table>
  
 <p id="newPost" >
-	<a href="@{form()}"><span>+</span> write a new post</a>
+	<a href="@{form()}"><button class="btn btn-primary"><i class="icon-pencil icon-white"></i>&nbsp;&nbsp;Write a new post!</button></a>
 </p>

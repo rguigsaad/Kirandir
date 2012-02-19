@@ -3,7 +3,10 @@ package controllers;
 import play.*;
 import play.mvc.*;
  
+import java.io.File;
 import java.util.*;
+
+import com.alienmegacorp.fileuploads.AbstractUploadedImage;
  
 import models.*;
  
@@ -32,7 +35,7 @@ public class Admin extends Controller {
     }
      
     public static void save(Long id, String title, String content, String tags) {
-        Post post;
+    	Post post;
         if(id == null) {
             // Create post
             User author = User.find("byEmail", Security.connected()).first();
@@ -60,4 +63,12 @@ public class Admin extends Controller {
         post.save();
         index();
     }
+    
+    public static void uploadPicture(File picture) {
+    	Picture image = new Picture();
+    	image.setFileToCopy(picture);
+    	image.save();
+        form(null);
+    }
+    
 }
