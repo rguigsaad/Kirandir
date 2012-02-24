@@ -1,0 +1,46 @@
+#{extends 'admin.html' /}
+ 
+<h3>Find your favorite blogger!</h3>
+
+<div class="accordion" id="accordion2">
+
+<p>
+ <table class="table table-striped">
+  </tbody>            
+#{list items:users, as:'user'}
+<tr>
+	<td>
+			<div>
+              <div>
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${user_index}">
+                  <h4>${user.fullname}</h4>
+                </a>
+              </div>
+              <div id="collapse${user_index}" class="accordion-body collapse in">
+                
+                   <ul class="unstyled">
+                   #{list items:posts, as:'post'}
+                   		#{if post.author.email == user.email}
+                   		<div class="accordion-inner">
+                   			<li><a href="/posts/${post.id}">${post.title}</a></li>
+                   			</div>
+                   		#{/if}
+                   #{/list}
+                   </ul>
+                
+              </div>
+            </div>
+       </td>
+</tr>
+#{/list}
+</table>
+</div>
+</p>
+
+<p id="New user !" >
+	<a href="/admin/users/new"><button class="btn btn-primary"><i class="icon-user icon-white"></i>&nbsp;&nbsp;New user</button></a>
+</p>
+
+<script type="text/javascript">
+	$(".collapse").collapse()
+</script>

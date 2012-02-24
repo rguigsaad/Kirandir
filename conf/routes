@@ -14,13 +14,13 @@ GET     /captcha                                Application.captcha
 GET		/pic									Application.getPicture
 
 # Administration
-GET     /admin/?                                Admin.index
-*       /admin                                  module:crud
-POST    /admin/myPosts/{id}                  Admin.save
+POST    /admin/myPosts/{id}                 Admin.save
 POST    /admin/new                          Admin.save
 GET     /admin/myPosts/{id}                 Admin.form
 GET     /admin/new                          Admin.form
-
+GET		/admin/users						Admin.users
+GET     /admin/?                            Admin.index
+*       /admin                              module:crud
 
 # Import Secure routes
 *       /                                       module:secure

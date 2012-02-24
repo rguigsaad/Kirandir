@@ -64,6 +64,12 @@ public class Admin extends Controller {
         index();
     }
     
+    public static void users() {
+        List<User> users = User.findAll();
+        List<User> posts = Post.findAll();
+        render(users,posts);
+    }
+    
     public static void uploadPicture(File picture) {
     	Picture image = new Picture();
     	image.setFileToCopy(picture);
